@@ -1,11 +1,12 @@
-const characterAmountRange = document.getElementById('characterAmountRange')
-const characterAmountNumber = document.getElementById('characterAmountNumber')
+// Functions for the Range and Number setting 
+var characterAmountRange = document.getElementById('characterAmountRange')
+var characterAmountNumber = document.getElementById('characterAmountNumber')
 
 characterAmountNumber.addEventListener('input', syncCharacterAmount)
 characterAmountRange.addEventListener('input', syncCharacterAmount)
 
 function syncCharacterAmount(e) {
-  const value = e.target.value
+  var value = e.target.value
   characterAmountRange.value = value
   characterAmountNumber.value = value
 }
@@ -28,12 +29,13 @@ generateBtn.addEventListener("click", writePassword);
 
 
 function generatePassword() {
-  var length = syncCharacterAmount;
+  var length = document.getElementById("characterAmountNumber").value
+  console.log(length)
   //Make length configurable
   var allowedCharacters = ""
   var password = ""
 
-// Lowercase
+  // Lowercase
   var lower = confirm("Would you like to use lowercase letters?");
   if (lower === true) {
     allowedCharacters += "abcdefghijklmnopqrstuvwxyz"
@@ -53,14 +55,15 @@ function generatePassword() {
   }
 
   //add numbers
-  var numbers= confirm("Would you like to use numbers?");
+  var numbers = confirm("Would you like to use numbers?");
   if (numbers === true) {
     allowedCharacters += "1234567890"
   }
 
   for (var i = 0; i < length; i++) {
-    //Make 0 into random
-    password += allowedCharacters[0]
+    var randomNumber = Math.floor(Math.random() * length)
+    password += allowedCharacters[randomNumber]
+    //I know randomNumber is the exact right thing to put here, but it did something so I used it. 
   }
   return password
 
