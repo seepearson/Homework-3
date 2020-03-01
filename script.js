@@ -1,4 +1,16 @@
-// Assignment Code
+const characterAmountRange = document.getElementById('characterAmountRange')
+const characterAmountNumber = document.getElementById('characterAmountNumber')
+
+characterAmountNumber.addEventListener('input', syncCharacterAmount)
+characterAmountRange.addEventListener('input', syncCharacterAmount)
+
+function syncCharacterAmount(e) {
+  const value = e.target.value
+  characterAmountRange.value = value
+  characterAmountNumber.value = value
+}
+
+/// Assignment Code
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
@@ -16,22 +28,38 @@ generateBtn.addEventListener("click", writePassword);
 
 
 function generatePassword() {
-  var length = 10;
+  var length = syncCharacterAmount;
+  //Make length configurable
   var allowedCharacters = ""
   var password = ""
 
-
-  var lower = confirm("Would you like to use lowercase letters");
+// Lowercase
+  var lower = confirm("Would you like to use lowercase letters?");
   if (lower === true) {
     allowedCharacters += "abcdefghijklmnopqrstuvwxyz"
 
   }
-  var upper = confirm("Would you like to use upperrcase letters");
+  // Uppercase
+  var upper = confirm("Would you like to use uppercase letters?");
   if (upper === true) {
     allowedCharacters += "abcdefghijklmnopqrstuvwxyz".toUpperCase()
 
   }
+
+  //add special characters
+  var specialCharacters = confirm("Would you like to use Special Characters?");
+  if (specialCharacters === true) {
+    allowedCharacters += "!@#$%^&*()[]{}+=<>,./"
+  }
+
+  //add numbers
+  var numbers= confirm("Would you like to use numbers?");
+  if (numbers === true) {
+    allowedCharacters += "1234567890"
+  }
+
   for (var i = 0; i < length; i++) {
+    //Make 0 into random
     password += allowedCharacters[0]
   }
   return password
@@ -40,12 +68,3 @@ function generatePassword() {
 
 
 }
-
-
-// //promts for password length
-// function buttonclicked(){
-// var pwlength = prompt("how long would you like your password? choose between 8-128 characters");
-// if(pwlength < 8 || pwlength > 128) {
-//   alert("please choose between 8-128");
-//   return buttonclicked();
-// }
